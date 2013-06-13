@@ -10,6 +10,7 @@ require 'travis/model'
   lastBuildStartedAt:  DS.attr('string')
   lastBuildFinishedAt: DS.attr('string')
   _lastBuildDuration:  DS.attr('number')
+  active:              DS.attr('boolean')
 
   lastBuild: DS.belongsTo('Travis.Build')
 
@@ -111,7 +112,7 @@ require 'travis/model'
     @find(owner_name: login, orderBy: 'name')
 
   accessibleBy: (login) ->
-    @find(member: login, orderBy: 'name')
+    @find(member: login, active: true)
 
   search: (query) ->
     @find(search: query, orderBy: 'name')
