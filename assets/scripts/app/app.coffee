@@ -32,7 +32,7 @@ unless window.TravisApplication
         klass.url = "/#{klass.pluralName()}"
 
       @slider = new Travis.Slider()
-      @pusher = new Travis.Pusher(Travis.config.pusher_key) if Travis.config.pusher_key
+      @pusher = new Travis.Pusher(key: Travis.config.pusher_key, host: Travis.config.pusher_host) if Travis.config.pusher_key
       @tailing = new Travis.Tailing()
 
       @set('auth', Travis.Auth.create(app: this, endpoint: Travis.config.api_endpoint))
