@@ -80,9 +80,9 @@ $.extend Travis.Pusher.prototype,
       when 'worker:added', 'worker:updated', 'worker:removed'
         { worker: data }
 
-  warn: (type, warning) ->
-    console.warn(warning) unless @ignoreWarning(warning)
+  warn: (type, object) ->
+    console.warn(type, object.error) unless @ignoreWarning(type, object.error)
 
-  ignoreWarning: (warning) ->
-    if message = warning.data?.message
+  ignoreWarning: (type, error) ->
+    if message = error?.data?.message
       message.indexOf('Existing subscription') == 0 or message.indexOf('No current subscription') == 0
