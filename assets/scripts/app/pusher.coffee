@@ -19,27 +19,22 @@ $.extend Travis.Pusher.prototype,
     @callbacksToProcess = []
 
     Visibility.change (e, state) =>
-      if state == 'visible'
-        @processSavedCallbacks()
+      @processSavedCallbacks() if state == 'visible'
 
     setInterval @processSavedCallbacks.bind(this), @processingIntervalWhenHidden
 
   subscribeAll: (channels) ->
-    for channel in channels
-      name = @prefix(channel)
-      unless @pusher.channels.find(name)
-        channel = @pusher.channels.add(name, this)
-        channel.bind_all((event, data) => @receive(event, data))
-    @pusher.subscribeAll()
+    @subscribe(channel) for channel in channels
 
   subscribe: (channel) ->
-    console.log("subscribing to #{channel}")
     channel = @prefix(channel)
-    @pusher.subscribe(channel).bind_all((event, data) => @receive(event, data)) unless @pusher?.channel(channel)
+    console.log("subscribing to #{channel}")
+    unless @pusher?.channel(channel)
+      @pusher.subscribe(channel).bind_all((event, data) => @receive(event, data))
 
   unsubscribe: (channel) ->
-    console.log("unsubscribing from #{channel}")
     channel = @prefix(channel)
+    console.log("unsubscribing from #{channel}")
     @pusher.unsubscribe(channel) if @pusher?.channel(channel)
 
   prefix: (channel) ->
