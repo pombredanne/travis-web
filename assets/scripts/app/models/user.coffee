@@ -28,7 +28,7 @@ require 'travis/model'
       @poll() if @get('isSyncing')
 
   urlGithub: (->
-    "https://github.com/#{@get('login')}"
+    "#{Travis.config.source_endpoint}/#{@get('login')}"
   ).property()
 
   permissions: (->

@@ -80,14 +80,14 @@ require 'config/emoij'
   _githubReferenceLink: (reference, current, matched) ->
     owner = matched.owner || current.owner
     repo = matched.repo || current.repo
-    "<a href=\"http://github.com/#{owner}/#{repo}/issues/#{matched.number}\">#{reference}</a>"
+    "<a href=\"#{Travis.config.source_endpoint}/#{owner}/#{repo}/issues/#{matched.number}\">#{reference}</a>"
 
   _githubReferenceRegexp: new RegExp("([\\w-]+)?\\/?([\\w-]+)?(?:#|gh-)(\\d+)", 'g')
 
   _githubUserRegexp: new RegExp("@([\\w-]+)", 'g')
 
   _githubUserLink: (reference, username) ->
-    "<a href=\"http://github.com/#{username}\">#{reference}</a>"
+    "<a href=\"#{Travis.config.source_endpoint}/#{username}\">#{reference}</a>"
 
   _normalizeDateString: (string) ->
     if window.JHW
