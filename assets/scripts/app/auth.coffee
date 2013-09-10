@@ -108,4 +108,4 @@
         @setData(event.data)
 
   expectedOrigin: ->
-    if @endpoint[0] == '/' then @receivingEnd else @endpoint
+    if @endpoint[0] == '/' then @receivingEnd else @endpoint.match(/^https?:\/\/[^\/]*/)[0]
