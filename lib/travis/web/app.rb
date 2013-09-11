@@ -34,7 +34,7 @@ class Travis::Web::App
     def build(options = {})
       builder = Rack::Builder.new
       if options[:environment] == 'production'
-        builder.use Rack::SSL, hsts: Travis.config.ssl.hsts || true
+        builder.use Rack::SSL, hsts: Travis.config.ssl.hsts
         # builder.use Rack::Cache
       end
       builder.use Rack::Deflater

@@ -51,6 +51,7 @@ GEM
     handlebars (0.4.0)
       commonjs (~> 0.2.3)
       therubyracer (~> 0.11.1)
+    hashr (0.0.22)
     i18n (0.6.3)
     json (1.7.7)
     libv8 (3.11.8.13)
@@ -137,6 +138,7 @@ DEPENDENCIES
   foreman
   guard
   handlebars
+  hashr
   localeapp
   localeapp-handlebars_i18n
   puma

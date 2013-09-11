@@ -7,6 +7,7 @@ gem 'rack-protection', '~> 1.3'
 gem 'rack-cache'
 gem 'rack-mobile-detect'
 gem 'sinatra'
+gem 'hashr'
 
 group :assets do
   gem 'rake-pipeline',  github: 'livingsocial/rake-pipeline'
