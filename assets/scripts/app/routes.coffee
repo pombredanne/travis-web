@@ -124,7 +124,8 @@ Travis.SetupLastBuild = Ember.Mixin.create
     # TODO: it would be nicer to do it with promises
     repo = @controllerFor('repo').get('repo')
     if repo && repo.get('isLoaded') && !repo.get('lastBuild')
-      @render('builds/not_found', outlet: 'pane', into: 'repo')
+      Ember.run.next =>
+        @render('builds/not_found', outlet: 'pane', into: 'repo', controller: 'buildNotFound')
 
 Travis.GettingStartedRoute = Ember.Route.extend
   setupController: ->
@@ -139,6 +140,11 @@ Travis.GettingStartedRoute = Ember.Route.extend
     @_super.apply(this, arguments)
 
 Travis.FirstSyncRoute = Ember.Route.extend
+  events:
+    renderNoOwnedRepos: (->)
+      # do nothing, we are showing first sync, so it's normal that there is
+      # no owned repos
+
   setupController: ->
     $('body').attr('id', 'home')
     @container.lookup('controller:repos').activate()
@@ -281,7 +287,8 @@ Travis.RepoRoute = Ember.Route.extend
         proxy.set 'isLoading', false
 
         if repos.get('length') == 0
-          self.render('repos/not_found', outlet: 'main')
+          Ember.run.next ->
+            self.render('repos/not_found', outlet: 'main')
         else
           proxy.set 'content', repos.objectAt(0)
 

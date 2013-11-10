@@ -77,6 +77,10 @@ require 'travis/model'
     else
       @_super(key)
 
+  formattedFinishedAt: (->
+    if finishedAt = @get('finishedAt')
+      moment(finishedAt).format('lll')
+  ).property('finishedAt')
 
 @Travis.Build.reopenClass
   byRepoId: (id, parameters) ->
